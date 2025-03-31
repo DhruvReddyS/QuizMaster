@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #0b1e28, #162b3c, #1e3a4c);
+    color: white;
+    padding: 30px;
+}
+
+/* Main Container */
+.result-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Header Grid Layout */
+.result-header-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 30px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+
+.quiz-details {
+    color: white;
+}
+
+.quiz-details h1 {
+    font-size: 28px;
+    color: #FFD700;
+    margin-bottom: 20px;
+}
+
+.quiz-details p {
+    margin: 6px 0;
+    font-size: 16px;
+}
+
+.quiz-details .label {
+    font-weight: 600;
+    color: #FFD700;
+}
+
+/* Chart Styling */
+.chart-section {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.chart-section h3,
+.chart-title {
+    color: #ffeb3b;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.chart-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Question Styling */
+.questions-section {
+    margin-top: 30px;
+}
+
+.question-box {
+    position: relative; /* Ensures marks are positioned correctly */
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.question-header {
+    padding-right: 100px; /* Prevents overlapping with marks */
+}
+
+.question-header p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffeb3b;
+}
+
+.marks {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+
+.question-box.correct {
+    border-left-color: #00c853;
+}
+
+.question-box.wrong {
+    border-left-color: #f44336;
+}
+
+.question-box.unattempted {
+    border-left-color: #ffc107;
+}
+
+.question-box h4 {
+    color: #ffeb3b;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Option List */
+.option-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+.option-item {
+    background: #2e3b4e;
+    color: #fff;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+}
+
+.option-item.correct-option {
+    border-color: #4caf50;
+}
+
+.option-item.selected-option {
+    font-weight: bold;
+    background: #455a64;
+}
+
+.option-item.correct-option.selected-option {
+    background: #4caf50;
+    color: #fff;
+}
+
+/* Answer Label */
+.result-label {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ff1744;
+}
+
+.question-box.correct .result-label {
+    color: #00e676;
+}
+
+.question-box.unattempted .result-label {
+    color: #ffc107;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFD700;
+    color: #000;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ffdb58;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .result-header-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .quiz-details,
+    .chart-section {
+        width: 100%;
+    }
+
+    .chart-section img {
+        max-width: 280px;
+    }
+}

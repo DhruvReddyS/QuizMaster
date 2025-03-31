@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/newchap.css">
+    <title>Edit Chapter</title>
+</head>
+<body>
+    <form class="form-container" action="/edit-chapter/{{ chapter.chap_id }}" method="post">
+        <h2>Edit Chapter</h2>
+        <div class="error">{{ str }}</div>
+        
+        <input type="hidden" name="sub_id" value="{{ chapter.sub_id }}">
+
+        <!-- Chapter Name Input -->
+        <div class="input-group">
+            <label for="chap_name">Chapter Name</label>
+            <input type="text" id="chap_name" name="chap_name" value="{{ chapter.chap_name }}" required>
+        </div>
+
+        <!-- Chapter Description Input -->
+        <div class="input-group">
+            <label for="chap_desc">Description</label>
+            <input type="text" id="chap_desc" name="chap_desc" value="{{ chapter.chap_desc }}">
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button type="submit">Save Changes</button>
+            <button type="button" class="cancel-button" onclick="window.location.href='{{ url_for('chapterdetails', chap_id=chapter.chap_id) }}'">
+                CLOSE
+            </button>
+            
+        </div>
+    </form>    
+</body>
+</html>

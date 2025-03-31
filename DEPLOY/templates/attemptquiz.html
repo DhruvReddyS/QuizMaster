@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Attempt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='attemptquiz.css') }}">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="header">
+            <h2>{{ quiz.quiz_name }}</h2>
+            <div class="timer">
+                <span class="label">Time Left:</span> <span id="timer">--:--</span>
+            </div>
+        </div>
+
+        <form id="quiz-form" method="post" action="{{ url_for('submit_quiz', quiz_id=quiz.quiz_id) }}" onsubmit="return confirm('Are you sure you want to submit your quiz?')">
+            {% for qn in questions %}
+            <div class="question-box">
+                <div class="question-header">
+                    <p>Q{{ loop.index }}: {{ qn.qn_stmt }}</p>
+                    <span class="marks">{{ qn.marks }} mark{{ 's' if qn.marks > 1 else '' }}</span>
+                </div>
+                <div class="options">
+                    {% for option in qn.options %}
+                    <label>
+                        <input type="radio" name="question_{{ qn.qn_id }}" value="{{ option.option_id }}">
+                        {{ option.option_stmt }}
+                    </label><br>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="btn-group">
+                <button type="submit" class="btn submit">Submit</button>
+                {% if show_result_btn %}
+                    <a href="{{ url_for('result', quiz_id=quiz.quiz_id) }}" class="btn result-btn">View Result</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let timeLeft = {{ quiz_duration | tojson }} * 60;  
+            const timerDisplay = document.getElementById("timer");
+    
+            const timerInterval = setInterval(() => {
+                timerDisplay.textContent = new Date(timeLeft * 1000).toISOString().substr(14, 5);
+                if (timeLeft-- <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up!");
+                }
+            }, 1000);
+        });
+    </script>
+    
+        
+</body>
+</html>

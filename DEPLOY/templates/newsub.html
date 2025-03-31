@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/newsub.css">
+</head>
+<body>
+    <form class="form-container" action = "/add-sub" method="post">
+        <h2>Add New Subject</h2>
+        <div class="error">{{str}}</div>
+        <div class="input-group">
+            <label for="sub">Subject Name</label>
+            <input type="text" id="sub" name="sub" placeholder="Enter Subject Name" required>
+        </div>
+        <div class="input-group">
+            <label for="desc">Description</label>
+            <input type="text" id="desc" name="desc" placeholder="Enter Subject Description">
+        </div>
+        <div class="button-group">
+            <button type="submit">Add Subject</button>
+            <a href = "/admindashboard" class = "cancel-button"> Cancel</a>
+        </div>
+    </form>    
+</body>
+</html>

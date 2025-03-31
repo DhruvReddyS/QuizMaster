@@ -1,0 +1,147 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Full-Page Background */
+body {
+    background: linear-gradient(to bottom, #0b1e28, #162b3c, #1e3a4c);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+/* Form Title */
+.form-container h2 {
+    color: #FFD700;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    padding-bottom: 5px;    
+    font-size: 14px; 
+    font-weight: bold;
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #FFD700;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: 0.3s ease;
+}
+
+/* Focus effect on input */
+.input-group input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Placeholder Styling */
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Submit & Cancel Buttons */
+button, .cancel-button {
+    flex: 1;
+    text-align: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+/* Submit Button */
+button {
+    background: #FFD700;
+    color: black;
+}
+
+button:hover {
+    background: #ffdb58;
+    transform: scale(1.05);
+}
+
+/* Cancel Button */
+.cancel-button {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-button:hover {
+    background: rgb(232, 43, 43);
+    transform: scale(1.05);
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 500px) {
+    .form-container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .input-group input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button, .cancel-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

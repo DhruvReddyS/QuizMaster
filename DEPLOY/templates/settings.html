@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="/static/settings.css">
+    <script>
+        function confirmDelete(url) {
+            if (confirm("Are you sure you want to delete this user?")) {
+                window.location.href = url;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="quizmaster-title">QuizMaster</h1>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <span class="ad">Welcome {{ username }}!</span>
+            <a href="/admindashboard">Home</a>
+            <a href="/quizzes">Quizzes</a>
+            <a href="/reports">Reports</a>
+            <a href="/settings" class="dashboard">Settings</a>
+            <a href="/">Logout</a>
+        </div>
+        <div class="search-container">
+            <form action="{{ url_for('admin_search') }}" method="get">
+                <input type="text" name="query" placeholder="Search quizzes..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Page Title -->
+    <section class="settings-container">
+        <h2>Manage Users</h2>
+
+        <!-- Users Table -->
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Qualification</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.qualification }}</td>
+                    <td>
+                        {% if user.role != 'Admin' %}
+                        <button class="btn delete" onclick="confirmDelete('/delete-user/{{ user.user_id }}')">Delete</button>
+                        {% else %}
+                        <span style="color:#FFD700;">Admin</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Form + Stats Grid -->
+        <div class="user-settings-grid">
+            <!-- Add User Form -->
+            <form class="form-container" action="{{ url_for('add_user') }}" method="POST">
+                <h2>Add New User</h2>
+                {% if str %}
+                 <div class="form-error">{{ str }}</div>
+                {% endif %}
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="text" name="username" placeholder="Email / Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="qualification" placeholder="Qualification">
+                <input type="date" name="dob" placeholder="dd-mm-yyyy">
+                <select name="role" required>
+                    <option value="Student">Student</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <button type="submit" class="btn add-user">Add User</button>
+            </form>
+
+            <!-- User Stats -->
+            <div class="stats-container">
+                <h3>👥 User Stats</h3>
+                <p><span>Total Users:</span> {{ users|length }}</p>
+                <p><span>Admins:</span> {{ admins_count }}</p>
+                <p><span>Students:</span> {{ students_count }}</p>
+                <p><span>Instructors:</span> {{ instructors_count }}</p>
+                <hr style="margin: 20px 0; border: 0.5px solid rgba(255,255,255,0.2);">
+                <p class="tip">💡 Tip: You can only delete non-admin users.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

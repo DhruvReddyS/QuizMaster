@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Summary</title>
+    <link rel="stylesheet" href="/static/usersummary.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="quizmaster-title">QUIZMASTER</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <span class="ad">Welcome {{ username }}!</span>
+            <a href="/studentdashboard">Home</a>
+            <a href="/scores">Scores</a>
+            <a href="/usersummary" class="dashboard">Summary</a>
+            <a href="/">Logout</a>
+        </div>
+        <form class="search-container" action="{{ url_for('user_search') }}" method="get">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+
+    <!-- Summary Charts -->
+    <section class="insights-container">
+        <div class="report-heading">
+            <h1>📈 Your Quiz Summary</h1>
+        </div>     
+        <div class="chart-grid">
+            <div class="chart-box">
+                <h3>Performance by Subject</h3>
+                <img src="data:image/png;base64,{{ subject_perf_img }}" alt="Subject Performance">
+            </div>
+            <div class="chart-box">
+                <h3>Your Quiz Attempts</h3>
+                <img src="data:image/png;base64,{{ attempts_img }}" alt="Attempts Line Chart">
+            </div>
+            <div class="chart-box">
+                <h3>Score Distribution</h3>
+                <img src="data:image/png;base64,{{ score_donut_img }}" alt="Score Distribution">
+            </div>
+            <div class="chart-box">
+                <h3>Completed vs Pending</h3>
+                <img src="data:image/png;base64,{{ quiz_status_img }}" alt="Status Pie Chart">
+            </div>
+        </div>        
+    </section>
+
+</body>
+</html>

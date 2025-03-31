@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="/static/result.css">
+</head>
+<body>
+    <div class="result-container">
+        <!-- Header & Chart -->
+        <div class="result-header-grid">
+            <div class="quiz-details">
+                <h1>{{ quiz.quiz_name }} - Results</h1>
+                <p><span class="label">Date:</span> {{ quiz.date_of_quiz.strftime('%d/%m/%Y') }}</p>
+                <p><span class="label">Duration:</span> {{ quiz.duration.strftime('%H:%M') }}</p>
+                <p><span class="label">Subject:</span> {{ quiz.chapter.subject.sub_name }}</p>
+                <p><span class="label">Chapter:</span> {{ quiz.chapter.chap_name }}</p>
+                <p><span class="label">Questions:</span> {{ questions|length }}</p>
+                <p><span class="label">Total Marks:</span> {{ quiz.total_marks or 'N/A' }}</p>
+                <p><span class="label">Your Score:</span> {{ score.total_score }}</p>
+            </div>
+            
+            <div class="chart-section">
+                <h3 class="chart-title">📊 Performance Breakdown</h3>
+                <img src="data:image/png;base64,{{ chart_data }}" alt="Performance Chart">
+            </div>
+        </div>
+        
+
+        <!-- Loop through all questions -->
+        <div class="questions-section">
+            {% for qn in questions %}
+            <div class="question-box {{ 'correct' if qn.selected_option_id == qn.correct_option_id else 'wrong' if qn.selected_option_id else 'unattempted' }}">
+                <h4>
+                    Q{{ loop.index }}: {{ qn.qn_stmt }}
+                </h4>
+                <span class="marks">{{ qn.marks }} mark{{ 's' if qn.marks > 1 else '' }}</span>
+
+                <ul class="option-list">
+                    {% for opt in qn.options %}
+                    <li class="option-item
+                        {% if opt.option_id == qn.correct_option_id %} correct-option{% endif %}
+                        {% if opt.option_id == qn.selected_option_id %} selected-option{% endif %}">
+                        {{ opt.option_stmt }}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <p class="result-label">
+                    {% if not qn.selected_option_id %}
+                        🚫 Unattempted
+                    {% elif qn.selected_option_id == qn.correct_option_id %}
+                        ✅ Correct
+                    {% else %}
+                        ❌ Incorrect
+                    {% endif %}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Back Button -->
+        <div class="center-btn">
+            <a href="{{ url_for('student_dashboard') }}" class="btn">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

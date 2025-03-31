@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Quiz</title>
+    <link rel="stylesheet" href="/static/viewquiz.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">View the Quiz</h2>
+
+        <div class="quiz-info">
+            <label>ID:</label>
+            <div class="value">{{ quiz.quiz_id }}</div>
+
+            <label>Quiz Title:</label>
+            <div class="value">{{ quiz.quiz_name }}</div>
+
+            <label>Subject:</label>
+            <div class="value">{{ subject.sub_name }}</div>
+
+            <label>Chapter:</label>
+            <div class="value">{{ chapter.chap_name }}</div>
+
+            <label>Number of Questions:</label>
+            <div class="value">{{ question_count }}</div>
+
+            <label>Scheduled Date:</label>
+            <div class="value">
+                {{ quiz.date_of_quiz.strftime('%d/%m/%Y') if quiz.date_of_quiz else 'N/A' }}
+            </div>
+
+            <label>Duration (hh:mm):</label>
+            <div class="value">
+                {{ quiz.duration.strftime('%H:%M') if quiz.duration else '00:00' }}
+            </div>
+
+            <label>Total Marks:</label>
+            <div class="value">{{ quiz.total_marks or 'N/A' }}</div>
+
+            <label>Remarks:</label>
+            <div class="value">{{ quiz.remarks or 'None' }}</div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="window.location.href='/studentdashboard'" class="btn close">Close</button>
+        </div>
+    </div>
+</body>
+</html>

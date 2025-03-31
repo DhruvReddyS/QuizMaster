@@ -1,0 +1,137 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Deep Elegant Background */
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    z-index: -1;
+}
+
+/* Centering the Login Box */
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glassmorphic Login Box */
+.login-box {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    width: 400px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.login-box:hover {
+    box-shadow: 0px 6px 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Heading */
+h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Input Groups */
+.input-group {
+    position: relative;
+    margin: 15px 0;
+    text-align: left;
+}
+
+/* Labels */
+.input-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* Input Fields */
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    color: #ffffff;
+    transition: 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: #FFD700;
+}
+
+/* Gold Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #FFD700;
+    color: #1e3c72;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
+}
+
+button:hover {
+    background: #ffdb58;
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
+    transform: scale(1.05);
+}
+
+/* Register Link */
+p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+p a {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+p a:hover {
+    color: #ffdb58;
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    padding-bottom: 5px ;    
+    font-size: 14px; 
+    font-weight: bolder;
+    padding-top: 4%;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/static/studentdash.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="dashboard-title">QUIZMASTER</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <p class="user-greeting">Welcome, {{ username }}!</p>
+            <a href="/studentdashboard">Home</a>
+            <a href="/scores">Scores</a>
+            <a href="/summary">Summary</a>
+            <a href="/">Logout</a>
+        </div>
+        <div class="search-container">
+            <form method="get" action="{{ url_for('user_search') }}">
+                <input type="text" name="query" placeholder="Search..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Search Results -->
+    <section class="quizzes-container">
+        <h2 class="table-heads">Search Results for "{{ query }}"</h2>
+        <table class="quiz-table">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Quiz Name</th>
+                    <th>Subject</th>
+                    <th>Chapter</th>
+                    <th>No. of Questions</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if results %}
+                    {% for quiz in results %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ quiz.quiz_name }}</td>
+                        <td>{{ quiz.subject_name }}</td>
+                        <td>{{ quiz.chapter_name }}</td>
+                        <td>{{ quiz.questions_count }}</td>
+                        <td>{{ quiz.date_of_quiz.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ '%02d:%02d'|format(quiz.duration.hour, quiz.duration.minute) }}</td>
+                        <td>
+                            <div class="btn-actions">
+                                <a href="/view-quiz/{{ quiz.quiz_id }}" class="btn view">View</a>
+                                <form method="get" action="{{ url_for('confirm_quiz', quiz_id=quiz.quiz_id) }}">
+                                    <button type="submit" class="btn start">Start</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="8">No quizzes found for your search.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

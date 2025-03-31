@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+    <link rel="stylesheet" href="/static/admindash.css">
+</head>
+<body>
+
+    <!-- QuizMaster Header -->
+    <div class="header-container">
+        <h1 class="quizmaster-title">QuizMaster</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <p class="ad">Welcome {{ username }}!</p>
+            <a href="/admindashboard">Dashboard</a>
+            <a href="/quizzes">Quizzes</a>
+            <a href="/reports">Reports</a>
+            <a href="/settings">Settings</a>
+            <a href="/">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Users Section -->
+    <section class="users-container">
+        <h2>All Users</h2>
+
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <button class="btn delete" onclick="confirmDelete('/delete-user/{{ user.user_id }}')">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</body>
+</html>
