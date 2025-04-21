@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/studentdash.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="dashboard-title">QUIZMASTER</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <p class="user-greeting">Welcome, {{ username }}!</p>
+            <a href="/studentdashboard">Home</a>
+            <a href="/scores">Scores</a>
+            <a href="/summary">Summary</a>
+            <a href="/">Logout</a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </nav>
+
+    <!-- Insights Section -->
+    <section class="insights-container">
+        <h2 class="heading">Insights</h2>
+        <div class="insights-bar">
+            <div class="insight">
+                <h3>Total Quizzes</h3>
+                <p>{{ insights.total_quizzes }}</p>
+            </div>
+            <div class="insight">
+                <h3>Completed Quizzes</h3>
+                <p>{{ insights.completed_quizzes }}</p>
+            </div>
+            <div class="insight">
+                <h3>Upcoming Quizzes</h3>
+                <p>{{ insights.upcoming_quizzes }}</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Unattempted Quizzes -->
+<section class="quizzes-container">
+    <h2>Upcoming & Unattempted Quizzes</h2>
+    <table class="quiz-table">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Quiz Name</th>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>No. of Questions</th>
+                <th>Date</th>
+                <th>Duration (hh:mm)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if unattempted_quizzes %}
+                {% for quiz in unattempted_quizzes %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ quiz.quiz_name }}</td>
+                    <td>{{ quiz.subject_name }}</td>
+                    <td>{{ quiz.chapter_name }}</td>
+                    <td>{{ quiz.questions_count }}</td>
+                    <td>{{ quiz.date_of_quiz.strftime("%d/%m/%Y") }}</td>
+                    <td>{{ "%02d:%02d"|format(quiz.duration.hour, quiz.duration.minute) }}</td>
+                    <td>
+                        <div class="btn-actions">
+                            <button class="btn view" onclick="window.location.href='/view-quiz/{{ quiz.quiz_id }}'">View</button>
+                            <form method="get" action="{{ url_for('confirm_quiz', quiz_id=quiz.quiz_id) }}">
+                                <button type="submit" class="btn start">Start</button>
+                            </form>
+                        </div>
+                    </td>                    
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="8">No unattempted quizzes available.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</section>
+
+<!-- Attempted Quizzes -->
+<section class="quizzes-container">
+    <h2>Attempted Quizzes</h2>
+    <table class="quiz-table">
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Quiz Name</th>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>No. of Questions</th>
+                <th>Date</th>
+                <th>Duration (hh:mm)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if attempted_quizzes %}
+                {% for quiz in attempted_quizzes %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ quiz.quiz_name }}</td>
+                    <td>{{ quiz.subject_name }}</td>
+                    <td>{{ quiz.chapter_name }}</td>
+                    <td>{{ quiz.questions_count }}</td>
+                    <td>{{ quiz.date_of_quiz.strftime("%d/%m/%Y") }}</td>
+                    <td>{{ "%02d:%02d"|format(quiz.duration.hour, quiz.duration.minute) }}</td>
+                    <td>
+                        <div class="btn-actions">
+                            <a href="/quiz/{{ quiz.quiz_id }}/result" class="btn view">View Result</a>
+                            <form method="get" action="{{ url_for('confirm_quiz', quiz_id=quiz.quiz_id) }}">
+                                <button type="submit" class="btn start">Reattempt</button>
+                            </form>
+                        </div>
+                    </td>                    
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="8">No attempted quizzes available.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</section>
+
+</body>
+</html>

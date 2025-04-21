@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Summary</title>
+    <link rel="stylesheet" href="/static/adminreports.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="quizmaster-title">QUIZMASTER</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <span class="ad">Welcome {{ username }}!</span>
+            <a href="/admindashboard">Home</a>
+            <a href="/quizzes">Quizzes</a>
+            <a href="/reports" class="dashboard">Reports</a>
+            <a href="/settings">Settings</a>
+            <a href="/">Logout</a>
+        </div>
+        <div class="search-container">
+            <form action="{{ url_for('admin_search') }}" method="get">
+                <input type="text" name="query" placeholder="Search quizzes..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <section class="insights-container">
+        <div class="report-heading">
+            <h1>📊 Report Summary</h1>
+        </div>     
+        <div class="chart-grid">
+            <div class="chart-box">
+                <h3>Subject-wise Average Scores</h3>
+                <img src="data:image/png;base64,{{ avg_score_img }}" alt="Average Scores">
+            </div>
+            <div class="chart-box">
+                <h3>Quiz Attempts Over Time</h3>
+                <img src="data:image/png;base64,{{ line_graph_img }}" alt="Line Chart">
+            </div>
+            <div class="chart-box">
+                <h3>Total Quizzes per Subject</h3>
+                <img src="data:image/png;base64,{{ quiz_count_img }}" alt="Quiz Count">
+            </div>
+            <div class="chart-box">
+                <h3>User-wise Total Scores</h3>
+                <img src="data:image/png;base64,{{ user_score_img }}" alt="User Scores">
+            </div>
+        </div>        
+    </section>
+    
+
+</body>
+</html>

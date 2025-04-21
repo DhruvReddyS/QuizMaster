@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Question</title>
+    <link rel="stylesheet" href="/static/addquestion.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Edit Question</h2>
+        <form action="/edit-question/{{ question.qn_id }}" method="post">
+            <label for="question_stmt">Question Statement:</label>
+            <textarea id="question_stmt" name="question_stmt" rows="4" required>{{ question.qn_stmt }}</textarea>
+
+            <label for="marks">Marks:</label>
+            <input type="number" id="marks" name="marks" min="1" value="{{ question.marks }}" required>
+
+            <div class="options-container">
+                <h3>Single Option Correct</h3>
+                {% set opts = question.options %}
+                {% for i in range(1, 5) %}
+                    <label for="option{{ i }}">Option {{ i }}:</label>
+                    <input type="text" id="option{{ i }}" name="option{{ i }}" value="{{ opts[i-1].option_stmt }}" required>
+                {% endfor %}
+
+                <label for="correct_option">Correct Option:</label>
+                <input type="number" id="correct_option" name="correct_option" min="1" max="4" value="{% for i in range(4) %}{% if opts[i].is_crct %}{{ i + 1 }}{% endif %}{% endfor %}" required>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn save">Save</button>
+                <button type="button" class="btn close" onclick="window.location.href='/quiz-details/{{ question.quiz_id }}'">Cancel</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

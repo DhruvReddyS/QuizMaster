@@ -1,0 +1,335 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Full-Page Background */
+body {
+    background: linear-gradient(to bottom, #0b1e28, #162b3c, #1e3a4c);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+/* QuizMaster Header */
+.header-container {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.3);
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.quizmaster-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #FFD700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+/* Navigation Bar */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.3);
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: 0.3s;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.ad{
+    align-self: center;
+    font-weight: 1000;
+    font-size: 18px;
+    color: #FFD700;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.3);
+
+}
+
+.nav-links .dashboard {
+    color: #FFD700;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 25px;
+}
+
+.search-container input {
+    border: none;
+    background: transparent;
+    color: white;
+    outline: none;
+    font-size: 16px;
+    width: 250px;
+    padding: 8px;
+}
+
+.search-container input::placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.search-container button {
+    background: #FFD700;
+    border: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-container button:hover {
+    background: #ffdb58;
+}
+
+/* Insights Section */
+.insights-container {
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.insights-container h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #FFD700;
+}
+
+.insights-bar {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.insight {
+    flex: 1;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    text-align: center;
+    box-shadow: 0px 3px 10px rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.insight h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #FFD700;
+}
+
+/* Subjects Section */
+.subjects-container {
+    width: 100%;
+    margin-bottom: 35px;
+    text-align: center;
+    background: rgba(10, 25, 40, 0.95); 
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(255, 255, 255, 0.3);
+}
+
+.subjects-container h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #FFD700;
+}
+
+/* Individual Subject Section */
+.subject-section {
+    margin-bottom: 25px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.15); /* Darker Background */
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.subject-section h3 {
+    text-align: center;
+    font-size: 20px;
+    color: #FFD700;
+    margin-bottom: 12px;
+}
+
+/* Darker Subject Table */
+.subject-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+.subject-table th, .subject-table td {
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #FFF;
+}
+
+.subject-table th {
+    background: rgba(30, 40, 50, 1); /* Darker Header */
+    color: #FFD700;
+    font-weight: 600;
+}
+
+.subject-table td {
+    background: rgba(10, 25, 40, 0.95); /* Darker table cells */
+}
+
+/* Buttons */
+.btn {
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit {
+    background-color: #00c853; /* Bright lime green */
+    color: white;
+    font-weight: 700;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 200, 83, 0.6);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit:hover {
+    background-color: #00e676;
+    transform: scale(1.05);
+}
+
+.delete {
+    background-color: #ff3d00; /* Bright red-orange */
+    color: white;
+    font-weight: 700;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 61, 0, 0.6);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete:hover {
+    background-color: #ff6e40;
+    transform: scale(1.05);
+}
+
+
+.chapter-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.add-quiz,
+.add-chapter,
+.add-subject {
+    background: #FFD700;
+    color: black;
+    font-size: 14px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0px 3px 10px rgba(255, 215, 0, 0.6);
+    border-radius: 20px;
+    border: none;
+}
+
+.add-quiz:hover,
+.add-chapter:hover,
+.add-subject:hover {
+    background: #ffdb58;
+}
+
+.delete-subject {
+    background: #ff1a1a;
+    color: white;
+    font-size: 14px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.7), 0 0 15px rgba(255, 77, 77, 0.5);
+    border-radius: 20px;
+    border: none;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.delete-subject:hover {
+    background: #ff1a1a;
+    box-shadow: 0 0 14px rgba(255, 0, 0, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .insights-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+    .subjects-container {
+        width: 95%;
+    }
+}

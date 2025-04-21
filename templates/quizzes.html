@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Quizzes</title>
+    <link rel="stylesheet" href="/static/admindash.css">
+    <script>
+        function confirmDelete(url) {
+            if (confirm("Are you sure you want to delete this quiz?")) {
+                window.location.href = url;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- QuizMaster Header -->
+    <div class="header-container">
+        <h1 class="quizmaster-title">QuizMaster</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <p class="ad">Welcome {{ username }}!</p>
+            <a href="/admindashboard">Home</a>
+            <a href="/quizzes" class="dashboard">Quizzes</a>
+            <a href="/reports">Reports</a>
+            <a href="/settings">Settings</a>
+            <a href="/">Logout</a>
+        </div>
+        <div class="search-container">
+            <form action="{{ url_for('admin_search') }}" method="get">
+                <input type="text" name="query" placeholder="Search quizzes..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Quizzes Section -->
+    <section class="subjects-container">
+        <h2>All Quizzes</h2>
+
+        <table class="subject-table">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Quiz Name</th>
+                    <th>Subject</th>
+                    <th>Chapter</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Total Marks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in quizzes %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ quiz.quiz_name }}</td>
+                    <td>{{ quiz.subject.sub_name }}</td>
+                    <td>{{ quiz.chapter.chap_name }}</td>
+                    <td>{{ quiz.date_of_quiz.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ "%02d:%02d"|format(quiz.duration.hour, quiz.duration.minute) }}</td>
+                    <td>{{ quiz.total_marks }}</td>
+                    <td>
+                        <a href="/edit-quiz/{{ quiz.quiz_id }}" class="btn edit">Edit</a>
+                        <form id="deleteForm{{ quiz.quiz_id }}" action="/delete-quizzes/{{ quiz.quiz_id }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn delete" onclick="return confirm('Are you sure you want to delete this quiz?')">Delete</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</body>
+</html>

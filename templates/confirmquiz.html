@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Quiz</title>
+    <link rel="stylesheet" href="/static/confirmquiz.css">
+    
+    <script>
+        function confirmClose() {
+            const confirmation = confirm("Are you sure you want to cancel starting the quiz?");
+            if (confirmation) {
+                window.location.href = "/studentdashboard";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-box">
+        <h2>Quiz Details</h2>
+        <p><strong>Quiz Name:</strong> {{ quiz.quiz_name }}</p>
+        <p><strong>Date:</strong> {{ quiz.date_of_quiz.strftime("%d/%m/%Y") }}</p>
+        <p><strong>Duration:</strong> {{ quiz.duration.strftime("%H:%M") }}</p>
+        <p><strong>Remarks:</strong> {{ quiz.remarks or "N/A" }}</p>
+
+        <div class="button-group">
+            <form method="post" action="{{ url_for('start_quiz', quiz_id=quiz.quiz_id) }}">
+                <button class="btn start" type="submit">Start Quiz</button>
+            </form>            
+            <button class="btn close" onclick="confirmClose()">Close</button>
+        </div>
+        
+        
+    </div>
+</body>
+</html>

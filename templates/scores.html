@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/scores.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="dashboard-title">QUIZMASTER</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <p class="user-greeting">Welcome, {{ username }}!</p>
+            <a href="/studentdashboard">Home</a>
+            <a class = "Scores" href="#">Scores</a>
+            <a href="#">Summary</a>
+            <a href="/">Logout</a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </nav>
+    <!-- Scores Table -->
+    <div class="table-container">
+        <h2 class="section-title">Your Quiz Scores</h2>
+        {% if scores %}
+        <table class="scores-table">
+            <thead>
+                <tr>
+                    <th>Quiz Name</th>
+                    <th>Chapter</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Score</th>
+                    <th>Total Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score.quiz.quiz_name }}</td>
+                    <td>{{ score.quiz.chapter.chap_name }}</td>
+                    <td>{{ score.quiz.chapter.subject.sub_name }}</td>
+                    <td>{{ score.time_stmt_of_attempt.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ score.total_score }}</td>
+                    <td>{{ score.quiz.total_marks }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-scores">No quiz attempts yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

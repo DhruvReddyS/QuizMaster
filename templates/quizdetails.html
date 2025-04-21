@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Quiz</title>
+    <link rel="stylesheet" href="/static/quizdetails.css">
+</head>
+<body>
+
+    <!-- QuizMaster Header -->
+    <div class="header-container">
+        <h1 class="quizmaster-title">QuizMaster</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <p class="ad">Welcome {{ username }}!</p>
+            <a href="/admindashboard">Home</a>
+            <a href="/quizzes">Quizzes</a>
+            <a href="/reports">Reports</a>
+            <a href="/settings">Settings</a>
+            <a href="/">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Quiz Details Section -->
+    <section class="quiz-container">
+        <h2 class="quiz-title">Quiz: {{ quiz.quiz_name }}</h2>
+        <!-- Existing Questions Table -->
+        <table class="quiz-table">
+            <thead>
+                <tr>
+                    <th>Q.No.</th>
+                    <th>Statement</th>
+                    <th>Marks</th>
+                    <th>Options</th>
+                    <th>Correct Answer</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ question.qn_stmt }}</td>
+                    <td>{{ question.marks }}</td>
+                    <td>
+                        <ul class="option-list">
+                            {% for option in question.options %}
+                            <li {% if option.is_crct %} class="correct-option" {% endif %}>
+                                {{ loop.index }}. {{ option.option_stmt }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        {% for option in question.options %}
+                            {% if option.is_crct %}
+                                {{ option.option_stmt }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <form action="{{ url_for('edit_question', qn_id=question.qn_id) }}" method="get">
+                            <button class="btn edit" type="submit">Edit</button>
+                        </form>
+                        <form action="{{ url_for('delete_question', qn_id=question.qn_id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn delete" onclick="return confirm('Are you sure you want to delete this question?')">DELETE</button>
+                        </form>
+                        
+                        
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>            
+        </table>
+
+        <!-- Add New Question Button -->
+        <form action="{{ url_for('add_question', quiz_id=quiz.quiz_id) }}" method="get">
+            <button class="btn add-question" type="submit">+ Add New Question</button>
+        </form>
+    </section>
+
+</body>
+</html>

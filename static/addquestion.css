@@ -1,0 +1,196 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Full-Page Background */
+body {
+    background: linear-gradient(to bottom, #0b1e28, #162b3c, #1e3a4c);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Form Container */
+.container {
+    background: rgba(10, 25, 40, 0.98);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+    width: 60%;
+    max-width: 800px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Heading */
+h2 {
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-size: 16px;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #FFD700;
+    text-align: left;
+}
+
+/* Input Fields */
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Focus Effect */
+input:focus, textarea:focus {
+    outline: none;
+    border: 2px solid #FFD700;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Options Section */
+.options-container {
+    background: rgba(30, 40, 50, 1);
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 25px;
+    box-shadow: 0px 4px 12px rgba(255, 215, 0, 0.5);
+}
+
+/* Options Heading */
+.options-container h3 {
+    color: #FFD700;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+/* Options Grid */
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Individual Option Fields */
+.option-group input {
+    width: 48%;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* Correct Option Section */
+.correct-option-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px rgba(255, 215, 0, 0.4);
+}
+
+/* Correct Option Label */
+.correct-option-label {
+    font-size: 16px;
+    color: #FFD700;
+    font-weight: 600;
+}
+
+/* Correct Option Input */
+.correct-option-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    margin-bottom: 25px; 
+    background: rgba(255, 255, 255, 0.15);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 3px 8px rgba(255, 215, 0, 0.4);
+}
+
+/* Buttons Container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px; /* ✅ Reduced gap for better layout */
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+/* Save Button */
+.btn.save {
+    background-color: #16a34a;
+    color: white;
+    box-shadow: 0px 3px 8px rgba(22, 163, 74, 0.5);
+}
+
+.btn.save:hover {
+    background-color: #15803d;
+    box-shadow: 0px 4px 12px rgba(22, 163, 74, 0.8);
+}
+
+/* Close Button */
+.btn.close {
+    background-color: #dc2626;
+    color: white;
+    box-shadow: 0px 3px 8px rgba(220, 38, 38, 0.5);
+}
+
+.btn.close:hover {
+    background-color: #b91c1c;
+    box-shadow: 0px 4px 12px rgba(220, 38, 38, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        width: 85%;
+        padding: 20px;
+    }
+    .option-group input {
+        width: 100%;
+    }
+    .btn {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    input, textarea {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Search Results</title>
+    <link rel="stylesheet" href="/static/admindash.css">    
+</head>
+<body>
+    
+    <!-- QuizMaster Header -->
+    <div class="header-container">
+        <h1 class="quizmaster-title">QuizMaster</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <p class="ad">Welcome {{ username }}!</p>
+            <a href="/admindashboard">Home</a>
+            <a href="/quizzes">Quizzes</a>
+            <a href="/reports">Reports</a>
+            <a href="/settings">Settings</a>
+            <a href="/">Logout</a>
+        </div>
+        <div class="search-container">
+            <form action="{{ url_for('admin_search') }}" method="get">
+                <input type="text" name="query" placeholder="Search..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <section class="insights-container">
+        <h2>Search Results for "{{ query }}"</h2>
+    </section>
+
+    {% if subjects %}
+    <section class="subjects-container">
+        <h2>Subjects</h2>
+        <table class="subject-table">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Subject Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sub in subjects %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ sub.sub_name }}</td>
+                    <td>{{ sub.sub_desc }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_subject', sub_id=sub.sub_id) }}" method="post" style="display:inline;">
+                            <button class="btn delete" title="Delete Subject">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    {% endif %}
+
+    {% if chapters %}
+    <section class="subjects-container">
+        <h2>Chapters</h2>
+        <table class="subject-table">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Chapter Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chap in chapters %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ chap.chap_name }}</td>
+                    <td>{{ chap.chap_desc }}</td>
+                    <td>
+                        <a href="{{ url_for('chapterdetails', chap_id=chap.chap_id) }}" class="btn edit" title="Edit Chapter">Edit</a>
+                        <a href="{{ url_for('delete_chapter', chap_id=chap.chap_id) }}" class="btn delete" title="Delete Chapter">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    {% endif %}
+
+    {% if quizzes %}
+    <section class="subjects-container">
+        <h2>Quizzes</h2>
+        <table class="subject-table">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Quiz Name</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Total Marks</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in quizzes %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ quiz.quiz_name }}</td>
+                    <td>{{ quiz.date_of_quiz.strftime("%d/%m/%Y") }}</td>
+                    <td>{{ "%02d:%02d"|format(quiz.duration.hour, quiz.duration.minute) }}</td>
+                    <td>{{ quiz.total_marks }}</td>
+                    <td>
+                        <a href="{{ url_for('quiz_details', quiz_id=quiz.quiz_id) }}" class="btn edit" title="Edit Quiz">Edit</a>
+                        <form action="{{ url_for('delete_quiz', quiz_id=quiz.quiz_id) }}" method="post" style="display:inline;">
+                            <button class="btn delete" title="Delete Quiz">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    {% endif %}
+
+    {% if not subjects and not chapters and not quizzes %}
+    <section class="subjects-container">
+        <p style="text-align:center;">No results found for "{{ query }}".</p>
+    </section>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Attempt</title>
+    <link rel="stylesheet" href="/static/attemptquiz.css">
+    <script>
+        const quizId = {{ quiz.quiz_id }};
+        const quizDuration = {{ quiz_duration }}; // in minutes
+        const form = document.getElementById("quiz-form");
+        const timerDisplay = document.getElementById("timer");
+        const timerKey = `timer_${quizId}`;
+        let timeLeft = quizDuration * 60;
+    
+        // Try to load from localStorage
+        const storedTime = localStorage.getItem(timerKey);
+        if (storedTime) {
+            timeLeft = parseInt(storedTime);
+        }
+    
+        const timerInterval = setInterval(() => {
+            localStorage.setItem(timerKey, timeLeft);
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                localStorage.removeItem(timerKey);
+                alert("⏰ Time's up! Submitting your quiz...");
+                window.onbeforeunload = null;
+                form.submit();
+            }
+    
+            timeLeft--;
+        }, 1000);
+    
+        // Prevent accidental navigation
+        window.onbeforeunload = () => {
+            return "Are you sure you want to leave? Your quiz progress will be lost.";
+        };
+    
+        // Clean up when form is submitted
+        form.onsubmit = () => {
+            localStorage.removeItem(timerKey);
+            window.onbeforeunload = null;
+        };
+    </script>
+    
+    
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="header">
+            <h2>{{ quiz.quiz_name }}</h2>
+            <div class="timer">
+                <strong>Time Left:</strong> <span id="timer">--:--</span>
+            </div>
+        </div>
+
+        <form id="quiz-form" method="post" action="{{ url_for('submit_quiz', quiz_id=quiz.quiz_id) }}" onsubmit="return confirmSubmit()">
+            {% for qn in questions %}
+            <div class="question-box">
+                <p><strong>Q{{ loop.index }}:</strong> {{ qn.qn_stmt }}</p>
+                <div class="options">
+                    {% for option in qn.options %}
+                    <label>
+                        <input type="radio" name="question_{{ qn.qn_id }}" value="{{ option.option_id }}">
+                        {{ option.option_stmt }}
+                    </label><br>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="btn-group">
+                <button type="submit" class="btn submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+</html>
